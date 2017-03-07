@@ -1,0 +1,12 @@
+//In this partial we set only those things that we want to be default on a particular element (that aren't normally the default)
+
+@viewport {
+  width: device-width;
+}
+
+body {
+  font-family: font-stack(body); //calling font-stack as defined in settings/variables
+  *, *::before, *::after {
+    box-sizing: border-box; //No vendor prefixes, autoprefixer will add them for us.
+  }
+}

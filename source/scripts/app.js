@@ -1,5 +1,6 @@
 import { dom } from 'blue-js'
 import { parser, registry } from 'blue-widgets'
+import 'bootstrap/dist/js/bootstrap'
 
 // Import project widgets
 import * as widgets from './widgets'

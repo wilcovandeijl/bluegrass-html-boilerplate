@@ -1,30 +1,100 @@
 // This is merely an 'index', no actual Scss/CSS to go in this file
 
+// Import library functions and mixins
+// @import 'blue_sass/library.scss';
+
 //--- 01. Settings ---//
 // Variables, config etc.
 @import '01-settings/variables';
+// @import '01-settings/fonts';
 
 //--- 02. Tools ---//
-// Import library functions and mixins
-@import 'nestable-grid/main';
-@import 'blueq/main';
-@import '02-tools/clearfix';
-@import '02-tools/font-face';
-@import '02-tools/sizing';
+
+// Utilities
+@import "02-tools/hide-text";
+@import "02-tools/opacity";
+@import "02-tools/image";
+@import "02-tools/reset-filter";
+@import "02-tools/resize";
+@import "02-tools/responsive-visibility";
+@import "02-tools/size";
+@import "02-tools/tab-focus";
+@import "02-tools/text-emphasis";
+@import "02-tools/text-overflow";
+@import "02-tools/vendor-prefixes";
+
+// Components
+@import "02-tools/alerts";
+@import "02-tools/buttons";
+@import "02-tools/panels";
+@import "02-tools/pagination";
+@import "02-tools/list-group";
+@import "02-tools/labels";
+@import "02-tools/nav-divider";
+@import "02-tools/forms";
+@import "02-tools/progress-bar";
+@import "02-tools/table-row";
+
+// Skins
+@import "02-tools/background-variant";
+@import "02-tools/border-radius";
+@import "02-tools/gradients";
+
+// Layout
+@import "02-tools/clearfix";
+@import "02-tools/center-block";
+@import "02-tools/nav-vertical-align";
+@import "02-tools/grid-framework";
+@import "02-tools/grid";
 
 //--- 03. Generic ---//
 // Put all Resets, Normalize etc baseline code
 @import '03-generic/reset';
+@import '03-generic/normalize';
 
-//--- 04. Elements ---//
-// Some global default element styles that are not usually the defaults
-@import '04-elements/fonts';
-@import '04-elements/page';
+//--- 04. Base ---//
+// Layout, tag selectors (be frugal with tag selectors)
+@import "04-elements/elements";
+@import "04-elements/scaffolding";
+@import "04-elements/type";
+@import "04-elements/code";
+@import "04-elements/grid";
+@import "04-elements/tables";
+@import "04-elements/forms";
+@import "04-elements/component-animations";
+// @import '04-elements/layout';
 
 //--- 05. Objects ---//
 // Here we put smaller parts of the ui - things like button styles, list styles, table styles etc.
 // Here we start making sure everything is namespaced/classed using BEM
-@import '05-objects/layout';
+// @import '05-objects/rte';
+@import "05-objects/buttons";
+@import "05-objects/tables";
+@import "05-objects/forms";
+@import "05-objects/dropdowns";
+@import "05-objects/button-groups";
+@import "05-objects/input-groups";
+@import "05-objects/navs";
+@import "05-objects/navbar";
+@import "05-objects/breadcrumbs";
+@import "05-objects/pagination";
+@import "05-objects/pager";
+@import "05-objects/labels";
+@import "05-objects/badges";
+@import "05-objects/jumbotron";
+@import "05-objects/thumbnails";
+@import "05-objects/alerts";
+@import "05-objects/progress-bars";
+@import "05-objects/media";
+@import "05-objects/list-group";
+@import "05-objects/panels";
+@import "05-objects/responsive-embed";
+@import "05-objects/wells";
+@import "05-objects/close";
+@import "05-objects/modals";
+@import "05-objects/tooltip";
+@import "05-objects/popovers";
+@import "05-objects/carousel";
 
 //--- 06. Components ---//
 // These are bespoke chunks of the UI - each of these imported files should contain ONLY ONE 'BLOCK' each, which should be named the same as the file
@@ -33,6 +103,7 @@
 
 //--- 07. Trumps ---//
 // Helpers and overrides
-// Use as sparingly as possible. Stuff in here can have !important. Again, USE ONLY WHEN NECESSARY (#NeverTrump)
-@import '07-trumps/helpers';
+// Use as sparingly as possible. Stuff in here can have !important. Again, USE ONLY WHEN NECESSARY
+@import "07-trumps/utilities";
+@import "07-trumps/responsive-utilities";
 @import '07-trumps/overrides';

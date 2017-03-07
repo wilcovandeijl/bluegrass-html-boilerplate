@@ -1,0 +1,264 @@
+$s-sizes: 14px 20px;
+$m-sizes: 16px 24px;
+$l-sizes: 18px 24px;
+$xl-sizes: 20px 25px;
+$xxl-sizes: 25px 30px, l 30px 35px;
+$xxxl-sizes: 30px 35px, l 35px 40px;
+
+.rte {
+  @include clearfix;
+}
+
+%margin {
+  &:first-child {
+    margin-top: 0;
+  }
+}
+%margin-s {
+  @extend %margin;
+  margin-top: .75em;
+}
+%margin-m {
+  @extend %margin;
+  margin-top: 1.5em;
+}
+%margin-l {
+  @extend %margin;
+  margin-top: 2em;
+}
+
+//---Heading Styles---//
+%heading {
+  @extend %margin-m;
+}
+@include rte-section('Headings') {
+  @include rte(h2,'Heading level 2',(block:h2)){
+    @include font-sizes($xxl-sizes...);
+    @extend %heading;
+  }
+  @include rte(h3,'Heading level 3',(block:h3)){
+    @include font-sizes($xl-sizes);
+    @extend %heading;
+  }
+  @include rte(h4,'Heading level 4',(block:h4)){
+    @include font-sizes($l-sizes);
+    @extend %heading;
+  }
+  @include rte(h5,'Heading level 5',(block:h5)){
+    @include font-sizes($m-sizes);
+    @extend %heading;
+  }
+}
+
+@include rte-section('Font sizes') {
+  $font-size-selectors: 'p,ol,ul,h1,h2,h3,h4,h5,h6,th,td,tr';
+  //---Independent font-size selectors---//
+  @include rte(size-s,'Small',(selector:$font-size-selectors),true){
+    @include font-sizes($s-sizes);
+  }
+  @include rte(size-m,'Medium',(selector:$font-size-selectors),true){
+    @include font-sizes($m-sizes);
+  }
+  @include rte(size-l,'Large',(selector:$font-size-selectors),true){
+    @include font-sizes($l-sizes);
+  }
+  @include rte(size-xl,'Extra Large',(selector:$font-size-selectors),true){
+    @include font-sizes($xl-sizes);
+  }
+  @include rte(size-xxl,'Extra Extra Large',(selector:$font-size-selectors),true){
+    @include font-sizes($xxl-sizes...);
+  }
+  @include rte(size-xxxl,'Extra Extra Extra Large',(selector:$font-size-selectors),true){
+    @include font-sizes($xxxl-sizes...);
+  }
+}
+
+@include rte-section('Content Columns') {
+  @include rte(columns-2,'Maximum 2 columns',(block:'div',wrapper:true,block_expand:true,remove_similar:true),true) {
+    @extend %margin-m;
+    columns: 2 340px;
+    column-gap: 2.5em;
+  }
+  @include rte(columns-3,'Maximum 3 columns',(block:'div',wrapper:true,block_expand:true,remove_similar:true),true) {
+    @extend %margin-m;
+    columns: 3 200px;
+    column-gap: 2em;
+  }
+  @include rte(columns-4,'Maximum 4 columns',(block:'div',wrapper:true,block_expand:true,remove_similar:true),true) {
+    @extend %margin-m;
+    columns: 4 180px;
+    column-gap: 2em;
+  }
+}
+
+//---Images---//
+
+//---Copy Styles---//
+@include rte(p,'Body text',(block:'p')){
+  @include clearfix;
+  @extend %margin-m;
+  @include font-sizes($m-sizes);
+}
+@include rte(a){
+  &:not([class]) {
+    text-decoration: none;
+    border-bottom: 1px solid;
+    margin-bottom: -1px;
+    &:hover, &:focus {
+      border-bottom: none;
+    }
+  }
+}
+
+@include rte(blockquote,'Blockquote',(block:'blockquote',wrapper:true,merge_siblings:false,block_expand:true,remove_similar:true)){
+  @extend %margin-m;
+  quotes: "\201C""\201D""\2018""\2019";
+  border-left: 10px solid #CCC;
+  background: #f9f9f9;
+  padding: 0.5em 10px;
+  p {
+    @include font-sizes($l-sizes);
+    cite {
+      @include font-sizes($m-sizes);
+    }
+    &:first-child {
+      &::before {
+        display: inline-block;
+        font-size: 4em;
+        content: open-quote;
+        color: #CCC;
+        line-height: 1px;
+        top: 0.5em;
+        position: relative;
+        margin-right: 15px;
+      }
+    }
+  }
+}
+
+@include rte(cite,'Author citation',(inline:'cite')) {
+  font-weight: bold;
+}
+
+//---List styles---//
+%list {
+  @extend %margin-m;
+  @include font-sizes($m-sizes);
+  padding-left: 1.25em;
+  li {
+    @extend %margin-s;
+  }
+}
+@include rte(ol){
+  @extend %list;
+}
+@include rte(ul){
+  @extend %list;
+}
+@include rte(dl){
+  @extend %margin-m;
+  @include font-sizes($m-sizes);
+  dd {
+    margin-top: .5em;
+  }
+  dt {
+    @extend %margin-m;
+    font-weight: bold;
+  }
+}
+
+//---Table styles---//
+@include rte(table){
+  @include font-sizes($m-sizes);
+  margin-top: 1.5em;
+  border-collapse: collapse;
+  td, th {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ccc;
+    min-width: 6.875em;
+  }
+}
+//This is applied around all tables within the rte and with the .table class, allowing overflow scrolling on mobile.
+.table-overflow {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  width: 100%;
+  position: relative;
+}
+
+//---Sub and Sup elements---//
+%subsup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+@include rte(sup){
+  @extend %subsup;
+  top: -0.5em;
+}
+
+@include rte(sub){
+  @extend %subsup;
+  bottom: -0.25em;
+}
+
+//---Images---//
+@include rte(img){
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 1em;
+}
+@include rte(img-full,'Full width image',(selector:'img')) {
+  width: 100%;
+}
+
+//---RTE default formats---//
+//These do not accept styles within the mixin, add the styles separately (see below)
+@include rte-default(bold,
+  (
+    (inline: 'strong', remove: 'all')
+  )
+);
+
+//If for example you then wanted to style the strong element differently
+@include rte(strong) {
+  //Styles here
+}
+
+@include rte-default(alignleft,
+  (
+    (selector: 'p,h1,h2,h3,h4,h5,h6,td,th,tr,div,ul,ol,li', styles: (textAlign: 'left'), defaultBlock: 'div'),
+    (selector: 'img,table', collapsed: false, classes: 'left')
+  )
+);
+
+@include rte(left) {
+  @include media(m) {
+    float: left;
+    margin-right: 16px;
+  }
+}
+
+@include rte-default(alignright,
+  (
+    (selector: 'p,h1,h2,h3,h4,h5,h6,td,th,tr,div,ul,ol,li', styles: (textAlign: 'right'), defaultBlock: 'div'),
+    (selector: 'img,table', collapsed: false, classes: 'right')
+  )
+);
+
+@include rte-default(underline,
+  (
+    (inline: 'span', styles: (borderBottom: '1px solid'), exact: true)
+  )
+);
+
+@include rte(right) {
+  @include media(m) {
+    float: right;
+    margin-left: 16px;
+  }
+}
